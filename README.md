@@ -65,13 +65,9 @@ Extracts structured data from a PDF resume. Supports S3 URIs, public URLs, or lo
 **Request:**
 ```json
 {
-    "file_path": "resume.pdf",
-    "file_name": "resume.pdf",
-    "upload_name": "my_resume.pdf"
+    "file_path": "s3://bucket/resume.pdf"
 }
 ```
-
-*Note: `file_name` and `upload_name` are optional.*
 
 *Note: If `file_path` is just a filename and `AWS_S3_BUCKET` is set, the service will first try to download it from that S3 bucket.*
 
