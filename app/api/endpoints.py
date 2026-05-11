@@ -43,8 +43,6 @@ async def parse_resume(request: ResumeParseRequest):
             upload_name=request.upload_name
         )
         return ResumeParseResponse(
-            success=True,
-            message="成功",
             data=ResumeData(**data)
         )
     except Exception as e:
