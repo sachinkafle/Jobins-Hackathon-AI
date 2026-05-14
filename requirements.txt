@@ -12,3 +12,4 @@ pytest-asyncio
 numpy
 pypdf
 boto3
+greenlet

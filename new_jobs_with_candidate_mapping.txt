@@ -1,0 +1,151 @@
+# New Jobs + Associated Candidates (manual seed)
+# Date: 2026-05-14
+# Notes:
+# - Field names follow app/models/db_models.py -> Job model.
+# - Use unique job_id values that do not exist in your DB.
+# - candidate_id=306 is included as requested context.
+
+================================================================================
+JOB 1
+================================================================================
+job_id: 2201
+organization_id: 1
+job_status: Open
+job_title: Senior PHP Laravel Backend Engineer
+job_description: Build and maintain backend APIs for business applications in Laravel. Improve code quality, optimize queries, and support production issues.
+job_responsibilities: Design REST APIs; implement Laravel services; optimize MySQL queries; write tests; support CI/CD deployment.
+application_condition: 4+ years PHP experience; 2+ years Laravel; API design; MySQL performance tuning.
+welcome_condition: Experience with AWS, Docker, Redis, and queue systems.
+job_change_possibility_description: Can grow into Technical Lead in 12-18 months.
+minimum_education_level: Any
+minimum_job_experience: 4 years
+minimum_industry_experience: 2 years
+employment_status: Full-time
+job_employment_category: ["Permanent"]
+experience: PHP, Laravel, MySQL, REST API, Git
+academic_level: Not required
+pref_nationality: Any
+gender: Any
+age_min: 24
+age_max: 45
+min_year_salary: 5500000
+max_year_salary: 8500000
+min_month_salary: 450000
+max_month_salary: 700000
+location_desc: Tokyo (Hybrid)
+working_hours: 10:00-19:00
+holidays: Sat/Sun/National holidays
+benefits: Social insurance, annual leave, training budget
+allowances: Transport, remote setup allowance
+selection_flow: CV Screening -> 1st Interview -> Tech Interview -> Final
+organization_description: SaaS company focused on workflow automation for SMB clients.
+recruitment_status: Active
+required_skills_text: PHP, Laravel, MySQL, REST API, Git, Backend Architecture
+required_qualification: Practical backend development experience with Laravel ecosystem.
+
+associated_candidate_ids: [306]
+association_reasoning: Candidate 306 appears to have PHP/Laravel background, which is directly aligned to core requirements.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+JOB 2
+================================================================================
+job_id: 2202
+organization_id: 1
+job_status: Open
+job_title: Bilingual ERP Accountant (Japanese/English)
+job_description: Manage monthly closing, AP/AR, and reporting in ERP systems. Coordinate with external tax/accounting partners.
+job_responsibilities: Monthly/quarterly closing; invoice checks; journal entries; internal reporting; audit prep.
+application_condition: 3+ years accounting experience; bookkeeping knowledge; ERP usage experience.
+welcome_condition: Experience in Netsuite or SAP; business-level Japanese.
+job_change_possibility_description: Path to Accounting Lead.
+minimum_education_level: Bachelor
+minimum_job_experience: 3 years
+minimum_industry_experience: 1 year
+employment_status: Full-time
+job_employment_category: ["Permanent"]
+experience: Accounting, ERP, Financial Reporting
+academic_level: Bachelor
+pref_nationality: Any
+gender: Any
+age_min: 23
+age_max: 42
+min_year_salary: 4200000
+max_year_salary: 7000000
+min_month_salary: 350000
+max_month_salary: 580000
+location_desc: Osaka
+working_hours: 09:00-18:00
+holidays: Sat/Sun/National holidays
+benefits: Social insurance, annual bonus
+allowances: Transport
+selection_flow: CV Screening -> Accounting Test -> Manager Interview
+organization_description: Mid-size manufacturing and trading group.
+recruitment_status: Active
+required_skills_text: Accounting, ERP, Closing, Journal Entries, Audit Support
+required_qualification: Experience in financial closing and ERP workflows.
+
+associated_candidate_ids: [<fill_from_your_db>]
+association_reasoning: Link candidates with proven accounting self_promotion/experience (avoid PHP/Laravel-only profiles).
+
+--------------------------------------------------------------------------------
+
+================================================================================
+JOB 3
+================================================================================
+job_id: 2203
+organization_id: 1
+job_status: Open
+job_title: Japanese Content Operations Specialist
+job_description: Operate Japanese-language content workflows, quality checks, and publishing calendar management.
+job_responsibilities: Content QA in Japanese; coordinate with editors; maintain publishing schedule; metadata tagging.
+application_condition: Native/near-native Japanese writing; 2+ years content operations experience.
+welcome_condition: SEO tools, CMS operations, basic analytics.
+job_change_possibility_description: Growth to Content Operations Lead.
+minimum_education_level: Any
+minimum_job_experience: 2 years
+minimum_industry_experience: 1 year
+employment_status: Full-time
+job_employment_category: ["Permanent"]
+experience: Japanese writing, CMS, QA, Content Ops
+academic_level: Not required
+pref_nationality: Any
+gender: Any
+age_min: 22
+age_max: 40
+min_year_salary: 3800000
+max_year_salary: 6000000
+min_month_salary: 320000
+max_month_salary: 500000
+location_desc: Tokyo
+working_hours: 09:30-18:30
+holidays: Sat/Sun/National holidays
+benefits: Social insurance, paid leave
+allowances: Transport
+selection_flow: CV Screening -> Writing Test -> Interview
+organization_description: Digital media and editorial operations company.
+recruitment_status: Active
+required_skills_text: Japanese language, Content QA, CMS, Editorial coordination
+required_qualification: Professional Japanese writing and operations experience.
+
+associated_candidate_ids: [<fill_from_your_db>]
+association_reasoning: Pick candidates with strong Japanese language profile and content/operations background.
+
+================================================================================
+OPTIONAL: SELECTION_HISTORY LINK FORMAT
+================================================================================
+# If you want to manually pre-link recommendations in selection_history:
+# id: <unique>
+# candidate_id: <candidate_id>
+# job_id: <job_id>
+# match_score: <0-100>
+# match_reason: <short reason>
+# recommended_bulk: true
+
+# Example link for David Wilson:
+# candidate_id: 306
+# job_id: 2201
+# match_score: 88
+# match_reason: Strong overlap in PHP/Laravel backend and API development.
+

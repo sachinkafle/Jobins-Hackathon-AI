@@ -20,8 +20,13 @@ async def populate_job_embeddings():
         
         for i, job in enumerate(jobs):
             # Create a rich text representation for the vector
-            job_text = f"Title: {job.job_title}\nDescription: {job.job_description}\nSkills: {job.required_skills_text}"
-            
+            job_text = (
+                f"Title: {job.job_title}\n"
+                f"Description: {job.job_description}\n"
+                f"Responsibilities: {job.job_responsibilities}\n"
+                f"Skills: {job.required_skills_text}"
+            )
+
             try:
                 embedding = await matcher.get_embedding(job_text)
                 
