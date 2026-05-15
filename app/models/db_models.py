@@ -63,6 +63,7 @@ class CandidatePool(Base):
     job_change_axis = Column(Text)
     job_support_factors = Column(Text)
     job_change_restrictions = Column(Text)
+    embedding = Column(JSON) # To store the vector
 
 class Job(Base):
     __tablename__ = "pb_job"

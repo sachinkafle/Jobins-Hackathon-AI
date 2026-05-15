@@ -211,7 +211,15 @@ class AIMatcherService:
             await session.flush()
 
         # 5. Semantic Search (Fast Filter)
-        cand_embedding = await self.get_embedding(candidate_text)
+        if candidate.embedding:
+            logger.info("Using cached candidate embedding.")
+            cand_embedding = candidate.embedding
+        else:
+            logger.info("Generating and caching candidate embedding...")
+            cand_embedding = await self.get_embedding(candidate_text)
+            candidate.embedding = cand_embedding
+            await session.flush()
+
         job_similarities = []
         for job in all_jobs:
             sim = self.cosine_similarity(cand_embedding, job.embedding)
@@ -228,16 +236,24 @@ class AIMatcherService:
         # 7. Format and Persist
         results = []
         for job, score_data in zip(top_jobs, scores):
-            res = JobMatchResult(
-                job_id=job.job_id,
-                score=score_data.get("score", 0),
-                reasoning=score_data.get("reasoning", "")
-            )
-            results.append(res)
-            await self.save_match_result(session, candidate_id, job.job_id, res.score, res.reasoning)
+            score = score_data.get("score", 0)
+            reasoning = score_data.get("reasoning", "")
+            
+            # Save all results to history (including 0) for audit
+            await self.save_match_result(session, candidate_id, job.job_id, score, reasoning)
+            
+            # Only add to returned results if score > 0
+            if score > 0:
+                results.append(
+                    JobMatchResult(
+                        job_id=job.job_id,
+                        score=score,
+                        reasoning=reasoning
+                    )
+                )
         
         await session.commit()
-        logger.info("Match results saved to history. Done!")
+        logger.info(f"Match results processed. Returned {len(results)} matches.")
         
         results.sort(key=lambda x: x.score, reverse=True)
         return results
@@ -288,16 +304,21 @@ class AIMatcherService:
         if not all_candidates:
             return []
 
-        # 4. Embed all candidates in batch for semantic search
-        logger.info(f"Generating embeddings for {len(all_candidates)} candidates (batch)...")
-        cand_texts = [self.build_candidate_text(c) for c in all_candidates]
-        cand_embeddings = await self.get_embeddings_batch(cand_texts)
+        # 4. Handle Missing Embeddings (Batching)
+        cands_needing_embedding = [c for c in all_candidates if not c.embedding]
+        if cands_needing_embedding:
+            logger.info(f"Generating embeddings for {len(cands_needing_embedding)} candidates (Batching)...")
+            texts = [self.build_candidate_text(c) for c in cands_needing_embedding]
+            new_embeddings = await self.get_embeddings_batch(texts)
+            for cand, emb in zip(cands_needing_embedding, new_embeddings):
+                cand.embedding = emb
+            await session.flush()
 
         # 5. Semantic search – embed job and rank candidates
         job_embedding = await self.get_embedding(job_text)
         cand_similarities = []
-        for cand, emb in zip(all_candidates, cand_embeddings):
-            sim = self.cosine_similarity(job_embedding, emb)
+        for cand in all_candidates:
+            sim = self.cosine_similarity(job_embedding, cand.embedding)
             cand_similarities.append((cand, sim))
 
         cand_similarities.sort(key=lambda x: x[1], reverse=True)
@@ -311,14 +332,16 @@ class AIMatcherService:
         # 7. Format results
         results = []
         for cand, sd in zip(top_candidates, scores):
-            results.append(
-                CandidateMatchResult(
-                    candidate_id=cand.id,
-                    candidate_company_id=cand.company_id,
-                    score=sd.get("score", 0),
-                    reasoning=sd.get("reasoning", "")
+            score = sd.get("score", 0)
+            if score > 0:
+                results.append(
+                    CandidateMatchResult(
+                        candidate_id=cand.id,
+                        candidate_company_id=cand.company_id,
+                        score=score,
+                        reasoning=sd.get("reasoning", "")
+                    )
                 )
-            )
 
         await session.commit()
         logger.info("Job-to-candidate match complete!")

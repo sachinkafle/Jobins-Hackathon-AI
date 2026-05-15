@@ -11,21 +11,19 @@ You are a Senior Technical Recruiter. Your goal is to provide a highly accurate,
 - 90-100: Exceptional Match. Meets ALL mandatory skills and seniority.
 - 70-89: Strong Match. Meets most skills.
 - 50-69: Average Match. Foundation is there, but specific tech stack is missing.
-- 1-49: Poor Match. Significant gaps.
-- 0: No Match OR Missing/Empty Job Data.
+- 1-49: Poor Match but has potential. Significant gaps.
+- 0: Absolute No Match OR Missing/Empty Job Data. Use 0 ONLY if there is zero relevance.
 
-### REASONING FORMAT:
-Provide 3 professional sentences:
-- Sentence 1: Technical alignment status.
-- Sentence 2: Experience/Seniority fit.
-- Sentence 3: Justification for the score based on evidence.
+### IMPORTANT:
+- If there is even a slight chance of a match or relevant skills, return a score of at least 1.
+- Results with a score of 0 will be filtered out of the final recommendation.
 
 ### OUTPUT FORMAT:
 You MUST return a valid JSON object. DO NOT include markdown code blocks.
-{{
+{
   "score": integer,
   "reasoning": "string"
-}}
+}
 """
 
 MATCHING_USER_PROMPT = """
