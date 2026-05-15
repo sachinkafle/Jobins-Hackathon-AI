@@ -26,10 +26,10 @@ class ResumeParserService:
         # 1. Check if it's an S3 URI (s3://bucket/key)
         parsed_url = urlparse(file_path)
         if parsed_url.scheme == 's3':
-            bucket = parsed_url.netloc or os.getenv("AWS_S3_BUCKET")
+            bucket = parsed_url.netloc or os.getenv("AWS_S3_BUCKET") or os.getenv("AWS_BUCKET")
             key = parsed_url.path.lstrip('/')
             logger.info(f"Downloading from S3: bucket={bucket}, key={key}")
-            s3 = boto3.client('s3')
+            s3 = boto3.client('s3', region_name=os.getenv("AWS_REGION", "ap-northeast-1"))
             response = s3.get_object(Bucket=bucket, Key=key)
             return response['Body'].read()
         
@@ -43,12 +43,12 @@ class ResumeParserService:
         
         # 3. Handle as a potential filename or local path
         else:
-            # If AWS_S3_BUCKET is set, try S3 first
-            bucket = os.getenv("AWS_S3_BUCKET")
+            # If AWS_S3_BUCKET or AWS_BUCKET is set, try S3 first
+            bucket = os.getenv("AWS_S3_BUCKET") or os.getenv("AWS_BUCKET")
             if bucket:
                 try:
                     logger.info(f"Attempting S3 download for filename '{file_path}' using bucket '{bucket}'")
-                    s3 = boto3.client('s3')
+                    s3 = boto3.client('s3', region_name=os.getenv("AWS_REGION", "ap-northeast-1"))
                     response = s3.get_object(Bucket=bucket, Key=file_path)
                     return response['Body'].read()
                 except Exception as e:
