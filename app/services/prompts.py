@@ -20,10 +20,10 @@ You are a Senior Technical Recruiter. Your goal is to provide a highly accurate,
 
 ### OUTPUT FORMAT:
 You MUST return a valid JSON object. DO NOT include markdown code blocks.
-{
+{{
   "score": integer,
   "reasoning": "string"
-}
+}}
 """
 
 MATCHING_USER_PROMPT = """

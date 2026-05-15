@@ -242,8 +242,9 @@ class AIMatcherService:
             # Save all results to history (including 0) for audit
             await self.save_match_result(session, candidate_id, job.job_id, score, reasoning)
             
-            # Only add to returned results if score > 0
-            if score > 0:
+            # Only add to returned results if score > 50
+            # TODO: lets check this based on requirement maybe from env file pachi check garne
+            if score > 50:
                 results.append(
                     JobMatchResult(
                         job_id=job.job_id,
@@ -333,7 +334,7 @@ class AIMatcherService:
         results = []
         for cand, sd in zip(top_candidates, scores):
             score = sd.get("score", 0)
-            if score > 0:
+            if score > 50:
                 results.append(
                     CandidateMatchResult(
                         candidate_id=cand.id,
