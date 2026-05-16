@@ -11,7 +11,12 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from app.models.db_models import CandidatePool, Job, SelectionHistory
 from app.models.schemas import JobMatchResult, CandidateMatchResult
-from app.services.prompts import MATCHING_SYSTEM_PROMPT, MATCHING_USER_PROMPT
+from app.services.prompts import (
+    MATCHING_SYSTEM_PROMPT, 
+    MATCHING_USER_PROMPT, 
+    BATCH_MATCHING_SYSTEM_PROMPT, 
+    BATCH_MATCHING_USER_PROMPT
+)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -56,8 +61,8 @@ class AIMatcherService:
             ("Job Responsibilities", job.job_responsibilities),
             ("Required Skills", job.required_skills_text),
             ("Required Qualification", job.required_qualification),
-            ("Application Condition", job.application_condition),
-            ("Welcome Condition", job.welcome_condition),
+            ("MANDATORY Requirements", job.application_condition),
+            ("WELCOME / Preferred Skills", job.welcome_condition),
             ("Role Scope", job.job_change_possibility_description),
             ("Minimum Education", job.minimum_education_level),
             ("Academic Level", job.academic_level),
@@ -80,7 +85,7 @@ class AIMatcherService:
             ("Organization Description", job.organization_description),
             ("Recruitment Status", job.recruitment_status),
         ]
-        return "\n".join(f"{label}: {to_text(value)}" for label, value in fields if to_text(value).strip())
+        return "\n".join(f"[{label}]: {to_text(value)}" for label, value in fields if to_text(value).strip())
 
     def build_candidate_text(self, c: CandidatePool) -> str:
         def t(v):
@@ -91,43 +96,43 @@ class AIMatcherService:
             return str(v)
 
         parts = [
-            ("Name", f"{t(c.first_name)} {t(c.last_name)}".strip()),
+            ("CANDIDATE NAME", f"{t(c.first_name)} {t(c.last_name)}".strip()),
             ("Gender", c.gender),
             ("Nationality", c.nationality),
-            ("Education", c.academic_background),
+            ("Academic Background", c.academic_background),
             ("Education Details", c.educational_background_details),
-            ("Qualification", c.qualification),
-            ("Experience (years)", c.experience),
+            ("Certifications / Qualifications", c.qualification),
+            ("Total Experience (years)", c.experience),
             ("Industry Experience (years)", c.years_of_industry_experience),
-            ("Companies Changed", c.no_of_company_change),
-            ("Current Status", c.current_employment_status),
-            ("Current Type", c.current_employment_type),
+            ("No. of Company Changes", c.no_of_company_change),
+            ("Current Employment Status", c.current_employment_status),
+            ("Current Employment Type", c.current_employment_type),
             ("Current Position", c.current_position),
-            ("Current Salary (year)", c.current_year_salary),
+            ("Current Annual Salary", c.current_year_salary),
             ("Most Recent Workplace", c.most_recent_workplace),
-            ("Skills", c.skill),
-            ("Japanese Skills", c.japanese_skills),
-            ("English Skills", c.english_skills),
-            ("Chinese Skills", c.chinese_skills),
+            ("TECHNICAL SKILLS", c.skill),
+            ("Japanese Proficiency", c.japanese_skills),
+            ("English Proficiency", c.english_skills),
+            ("Chinese Proficiency", c.chinese_skills),
             ("Other Languages", c.other_languages),
-            ("TOEIC", c.toeic),
-            ("TOEFL", c.toefl),
-            ("Self Promotion", c.self_promotion),
-            ("Work History", c.employment_histories),
+            ("TOEIC Score", c.toeic),
+            ("TOEFL Score", c.toefl),
+            ("SELF PROMOTION / SUMMARY", c.self_promotion),
+            ("WORK HISTORY", c.employment_histories),
             ("Desired Job Timing", c.desired_job_change_timing),
-            ("Desired Motivation", c.desired_job_change_motivation),
+            ("Motivation for Job Change", c.desired_job_change_motivation),
             ("Desired Employment Type", c.desired_employment_type),
             ("Desired Position", c.desired_position),
-            ("Min Desired Salary", c.min_desire_salary),
-            ("Relocation OK", c.relocation),
+            ("Minimum Desired Salary", c.min_desire_salary),
+            ("Relocation Possible", c.relocation),
             ("Desired Locations", c.specified_desired_locations),
             ("Desired Occupations", c.specified_desired_occupations),
             ("Desired Sub-industries", c.specified_desired_sub_industries),
-            ("Personality", c.candidate_personality),
+            ("Personality Analysis", c.candidate_personality),
             ("Job Change Axis", c.job_change_axis),
-            ("CV Data", c.document_parsed_cv),
+            ("CV DATA (FULL PARSED)", c.document_parsed_cv),
         ]
-        return "\n".join(f"{label}: {t(value)}" for label, value in parts if t(value).strip())
+        return "\n".join(f"[{label}]: {t(value)}" for label, value in parts if t(value).strip())
 
     async def get_recommended_job_ids(self, session: AsyncSession, candidate_id: int) -> List[int]:
         query = select(SelectionHistory.job_id).where(SelectionHistory.candidate_id == candidate_id)
@@ -158,9 +163,46 @@ class AIMatcherService:
             content = response.content
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0].strip()
-            return json.loads(content)
+            data = json.loads(content)
+            score = data.get("score", 0)
+            data["score"] = min(max(int(score), 0), 100)
+            return data
         except Exception:
             return {"score": 0, "reasoning": "Failed to generate reasoning."}
+
+    async def batch_score_matches(self, core_profile: str, items: List[Dict[str, str]]) -> List[Dict]:
+        """
+        Scores multiple items (jobs or candidates) against a core profile in one LLM call.
+        """
+        if not items:
+            return []
+            
+        items_list_text = "\n---\n".join([f"ID: {item['id']}\n{item['text']}" for item in items])
+        
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", BATCH_MATCHING_SYSTEM_PROMPT),
+            ("user", BATCH_MATCHING_USER_PROMPT)
+        ])
+        
+        chain = prompt | self.llm
+        response = await chain.ainvoke({
+            "core_profile": core_profile,
+            "items_list": items_list_text
+        })
+        
+        try:
+            content = response.content
+            if "```json" in content:
+                content = content.split("```json")[1].split("```")[0].strip()
+            data = json.loads(content)
+            matches = data.get("matches", [])
+            for m in matches:
+                # Safety cap: Clamp score between 0 and 100
+                m["score"] = min(max(int(m.get("score", 0)), 0), 100)
+            return matches
+        except Exception as e:
+            logger.error(f"Batch scoring failed: {e}")
+            return [{"id": item["id"], "score": 0, "reasoning": "Batch scoring failed."} for item in items]
 
     async def match_candidate_to_jobs(self, session: AsyncSession, candidate_id: int, company_id: int = None) -> List[JobMatchResult]:
         logger.info(f"--- Starting Match for Candidate {candidate_id} ---")
@@ -181,18 +223,15 @@ class AIMatcherService:
         # Prepare rich candidate text
         candidate_text = self.build_candidate_text(candidate)
 
-        # 2. Exclude history
-        recommended_job_ids = await self.get_recommended_job_ids(session, candidate_id)
-        logger.info(f"Excluding {len(recommended_job_ids)} previously recommended jobs.")
+        # 2. Fetch Jobs
 
         # 3. Fetch Jobs
         jobs_query = select(Job).where(
             and_(
                 Job.organization_id == company_id,
-                Job.job_status == 'Open',
-                not_(Job.job_id.in_(recommended_job_ids)) if recommended_job_ids else True
+                Job.job_status == 'Open'
             )
-        )
+        )  # No limit — embeddings are pre-computed, so loading all jobs is just a fast DB read
         jobs_res = await session.execute(jobs_query)
         all_jobs = jobs_res.scalars().all()
         logger.info(f"Found {len(all_jobs)} potential jobs in company.")
@@ -226,24 +265,20 @@ class AIMatcherService:
             job_similarities.append((job, sim))
 
         job_similarities.sort(key=lambda x: x[1], reverse=True)
-        top_jobs = [item[0] for item in job_similarities[:10]] # AI Scores top 10
+        top_jobs = [item[0] for item in job_similarities[:5]]  # Top 5 for speed
         logger.info(f"Semantic search completed. Top Job: {top_jobs[0].job_title if top_jobs else 'None'}")
 
-        # 6. AI Reranking
+        # 6. AI Reranking — parallel individual calls (faster than batch for focused context)
         tasks = [self.score_match(candidate_text, self.build_job_text(j)) for j in top_jobs]
         scores = await asyncio.gather(*tasks)
 
-        # 7. Format and Persist
+        # 7. Format results
         results = []
         for job, score_data in zip(top_jobs, scores):
             score = score_data.get("score", 0)
             reasoning = score_data.get("reasoning", "")
             
-            # Save all results to history (including 0) for audit
-            await self.save_match_result(session, candidate_id, job.job_id, score, reasoning)
-            
-            # Only add to returned results if score > 50
-            # TODO: lets check this based on requirement maybe from env file pachi check garne
+            # Only add to returned results if score > 50 
             if score > 50:
                 results.append(
                     JobMatchResult(
@@ -292,13 +327,15 @@ class AIMatcherService:
                     CandidatePool.self_promotion != "",
                 )
             )
-        )
+        )  # No limit — embeddings are pre-computed, so the DB read is fast
         pool_res = await session.execute(pool_query)
         all_candidates = pool_res.scalars().all()
 
         # Fallback: include candidates without self_promotion
         if not all_candidates:
-            pool_res2 = await session.execute(select(CandidatePool).where(company_filter))
+            pool_res2 = await session.execute(
+                select(CandidatePool).where(company_filter)
+            )
             all_candidates = pool_res2.scalars().all()
 
         logger.info(f"Candidate pool size: {len(all_candidates)}")
@@ -323,13 +360,13 @@ class AIMatcherService:
             cand_similarities.append((cand, sim))
 
         cand_similarities.sort(key=lambda x: x[1], reverse=True)
-        top_candidates = [item[0] for item in cand_similarities[:10]]
+        top_candidates = [item[0] for item in cand_similarities[:5]]  # Top 5 for speed
         logger.info(f"Semantic search done. Top candidate: {top_candidates[0].first_name if top_candidates else 'None'}")
 
-        # 6. AI Reranking
+        # 6. AI Reranking — parallel individual calls
         tasks = [self.score_match(self.build_candidate_text(c), job_text) for c in top_candidates]
         scores = await asyncio.gather(*tasks)
-        
+
         # 7. Format results
         results = []
         for cand, sd in zip(top_candidates, scores):

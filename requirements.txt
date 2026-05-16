@@ -14,3 +14,5 @@ pypdf
 boto3
 greenlet
 cryptography
+fastapi-cache2
+jinja2
