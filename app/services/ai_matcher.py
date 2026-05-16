@@ -6,7 +6,7 @@ import logging
 from typing import List, Dict, Any, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy import and_, not_, update
+from sqlalchemy import and_, or_, not_, update
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from app.models.db_models import CandidatePool, Job, SelectionHistory
@@ -55,15 +55,33 @@ class AIMatcherService:
                 return json.dumps(value, ensure_ascii=True)
             return str(value)
 
+        def format_salary(val):
+            if val is None or str(val).strip() == "":
+                return ""
+            try:
+                # If it's a small number like 120.0, it's likely millions of Yen
+                num = float(val)
+                if 1 <= num <= 2000:
+                    return f"{num} Million JPY (est.)"
+                return str(val)
+            except:
+                return str(val)
+
         fields = [
             ("Job Title", job.job_title),
             ("Job Description", job.job_description),
+            ("Recruitment Background", job.recruitment_background),
             ("Job Responsibilities", job.job_responsibilities),
             ("Required Skills", job.required_skills_text),
             ("Required Qualification", job.required_qualification),
             ("MANDATORY Requirements", job.application_condition),
             ("WELCOME / Preferred Skills", job.welcome_condition),
+            ("Career Path", job.career_path),
+            ("Company Culture", job.company_culture),
+            ("Training Details", job.training_description),
+            ("Job Appeal", job.job_appeal),
             ("Role Scope", job.job_change_possibility_description),
+            ("Location Change Possibility", job.location_change_possibility_description),
             ("Minimum Education", job.minimum_education_level),
             ("Academic Level", job.academic_level),
             ("Experience", job.experience),
@@ -74,8 +92,8 @@ class AIMatcherService:
             ("Preferred Nationality", job.pref_nationality),
             ("Preferred Gender", job.gender),
             ("Age Range", f"{to_text(job.age_min)}-{to_text(job.age_max)}" if job.age_min or job.age_max else ""),
-            ("Year Salary", f"{to_text(job.min_year_salary)}-{to_text(job.max_year_salary)}" if job.min_year_salary or job.max_year_salary else ""),
-            ("Month Salary", f"{to_text(job.min_month_salary)}-{to_text(job.max_month_salary)}" if job.min_month_salary or job.max_month_salary else ""),
+            ("Year Salary", f"{format_salary(job.min_year_salary)} - {format_salary(job.max_year_salary)}"),
+            ("Month Salary", f"{to_text(job.min_month_salary)} - {to_text(job.max_month_salary)}"),
             ("Location", job.location_desc),
             ("Working Hours", job.working_hours),
             ("Holidays", job.holidays),
@@ -227,14 +245,11 @@ class AIMatcherService:
 
         # 3. Fetch Jobs
         jobs_query = select(Job).where(
-            and_(
-                Job.organization_id == company_id,
-                Job.job_status == 'Open'
-            )
-        )  # No limit — embeddings are pre-computed, so loading all jobs is just a fast DB read
+            Job.job_status == 'Open'
+        )  # Global search across all companies - optimized via embedding similarity below
         jobs_res = await session.execute(jobs_query)
         all_jobs = jobs_res.scalars().all()
-        logger.info(f"Found {len(all_jobs)} potential jobs in company.")
+        logger.info(f"Found {len(all_jobs)} potential jobs globally.")
 
         if not all_jobs:
             return []
@@ -321,10 +336,9 @@ class AIMatcherService:
         pool_query = (
             select(CandidatePool)
             .where(
-                and_(
-                    company_filter,
-                    CandidatePool.self_promotion.isnot(None),
-                    CandidatePool.self_promotion != "",
+                or_(
+                    and_(CandidatePool.self_promotion.isnot(None), CandidatePool.self_promotion != ""),
+                    and_(CandidatePool.skill.isnot(None), CandidatePool.skill != "[]")
                 )
             )
         )  # No limit — embeddings are pre-computed, so the DB read is fast
@@ -334,7 +348,7 @@ class AIMatcherService:
         # Fallback: include candidates without self_promotion
         if not all_candidates:
             pool_res2 = await session.execute(
-                select(CandidatePool).where(company_filter)
+                select(CandidatePool)
             )
             all_candidates = pool_res2.scalars().all()
 

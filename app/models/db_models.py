@@ -101,6 +101,12 @@ class Job(Base):
     required_skills_text = Column(Text)
     required_qualification = Column(Text)
     job_status = Column(String(50)) # 'Open', 'Close', etc.
+    recruitment_background = Column(Text)
+    career_path = Column(Text)
+    company_culture = Column(Text)
+    training_description = Column(Text)
+    job_appeal = Column(Text)
+    location_change_possibility_description = Column(Text)
     embedding = Column(JSON) # To store the vector
 
 class SelectionHistory(Base):

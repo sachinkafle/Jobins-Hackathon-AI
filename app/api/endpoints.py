@@ -32,7 +32,7 @@ async def match_candidate_to_jobs(payload: CandidateMatchRequest, db: AsyncSessi
     try:
         results = await matcher_service.match_candidate_to_jobs(db, payload.candidate_id)
         response = JobMatchResponse(results=results)
-        ai_cache.set(cache_key, response, ttl_seconds=300)
+        ai_cache.set(cache_key, response, ttl_seconds=100)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -47,7 +47,7 @@ async def match_job_to_candidates(payload: JobMatchRequest, db: AsyncSession = D
     try:
         results = await matcher_service.match_job_to_candidates(db, payload.job_id)
         response = CandidateMatchResponse(results=results)
-        ai_cache.set(cache_key, response, ttl_seconds=300)
+        ai_cache.set(cache_key, response, ttl_seconds=100)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -70,7 +70,7 @@ async def parse_resume(payload: ResumeParseRequest):
             message="Resume parsed successfully",
             data=ResumeData(**data)
         )
-        ai_cache.set(cache_key, response, ttl_seconds=600)
+        ai_cache.set(cache_key, response, ttl_seconds=100)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
