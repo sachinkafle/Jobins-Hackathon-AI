@@ -278,8 +278,8 @@ class AIMatcherService:
             score = score_data.get("score", 0)
             reasoning = score_data.get("reasoning", "")
             
-            # Only add to returned results if score > 50 
-            if score > 50:
+            # Only add to returned results if score > 20 
+            if score > 20:
                 results.append(
                     JobMatchResult(
                         job_id=job.job_id,
@@ -371,7 +371,7 @@ class AIMatcherService:
         results = []
         for cand, sd in zip(top_candidates, scores):
             score = sd.get("score", 0)
-            if score > 50:
+            if score > 20:
                 results.append(
                     CandidateMatchResult(
                         candidate_id=cand.id,
