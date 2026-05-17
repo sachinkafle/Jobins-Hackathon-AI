@@ -19,9 +19,20 @@ async def init_models():
             if not column_exists:
                 print("Adding 'embedding' column to pb_job...")
                 await conn.execute(text("ALTER TABLE pb_job ADD COLUMN embedding JSON"))
-                print("Column 'embedding' added successfully.")
+                print("Column 'embedding' added successfully to pb_job.")
             else:
-                print("Column 'embedding' already exists.")
+                print("Column 'embedding' already exists in pb_job.")
+
+            # Check if embedding column exists in candidate_pool
+            result2 = await conn.execute(text("SHOW COLUMNS FROM candidate_pool LIKE 'embedding'"))
+            column_exists2 = result2.fetchone()
+            
+            if not column_exists2:
+                print("Adding 'embedding' column to candidate_pool...")
+                await conn.execute(text("ALTER TABLE candidate_pool ADD COLUMN embedding JSON"))
+                print("Column 'embedding' added successfully to candidate_pool.")
+            else:
+                print("Column 'embedding' already exists in candidate_pool.")
                 
         except Exception as e:
             print(f"Migration notice: {e}")

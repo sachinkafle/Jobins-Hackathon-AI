@@ -14,6 +14,7 @@ class JobMatchResult(BaseModel):
 
 class CandidateMatchResult(BaseModel):
     candidate_id: int
+    candidate_company_id: int
     score: int
     reasoning: str
 
