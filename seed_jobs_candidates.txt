@@ -1,0 +1,836 @@
+================================================================================
+SEED DATA — 5 Jobs × 2 Candidates each
+Format: Exact UI JSON payloads (copy-paste ready for manual insertion)
+Date: 2026-05-16
+================================================================================
+Notes:
+  - Job JSON  → POST /api/jobs  (or insert into pb_job)
+  - Candidate JSON → POST /api/candidates (or insert into candidate_pool)
+  - SelectionHistory → links candidate to job with AI match context
+  - Use job_ids: 3001–3005  |  candidate_ids: 4001–4010
+================================================================================
+
+
+################################################################################
+JOB 1 — Senior PHP / Laravel Backend Engineer (Tokyo, Full-time)
+################################################################################
+
+---- JOB PAYLOAD ---------------------------------------------------------------
+{
+  "job_status": "Open",
+  "job_title": "Senior PHP / Laravel Backend Engineer",
+  "employment_status": "Full-time",
+  "minimum_education_level": "Any",
+  "job_type_id": null,
+  "sub_job_type_id": null,
+  "recruitment_status": "Active",
+  "minimum_job_experience": "4",
+  "minimum_industry_experience": "2",
+  "overall_experience": null,
+  "job_description": "Build and maintain scalable REST APIs for a B2B SaaS workflow platform. Own end-to-end backend features from schema design to deployment.",
+  "application_condition": "4+ years PHP experience; 2+ years Laravel; strong MySQL; REST API design; Git workflow.",
+  "welcome_condition": "Experience with AWS (EC2/RDS/SQS), Docker, Redis, queue systems, PHPUnit.",
+  "benefits": "Social insurance, annual bonus, training budget ¥100,000/year, free book allowance",
+  "regions": [],
+  "prefectures": [],
+  "cities": [],
+  "location_desc": "Tokyo (Hybrid — 3 days office)",
+  "working_hours": "10:00-19:00 (flextime available)",
+  "no_of_vacancy": "1",
+  "relocation": "Negotiable",
+  "allowances": "Transport (up to ¥30,000/month), remote setup ¥50,000 one-time",
+  "holidays": "Sat/Sun/National holidays, 10 days annual leave from year 1",
+  "probation": "3 months",
+  "probation_detail": "Same conditions as full employment",
+  "min_year_salary": 5500000,
+  "max_year_salary": 8500000,
+  "min_month_salary": 450000,
+  "max_month_salary": 700000,
+  "salary_desc": "Negotiable based on experience",
+  "bonus": "Yes",
+  "bonus_desc": "2x per year (June / December)",
+  "organization_name": "WorkflowX Inc.",
+  "organization_description": "B2B SaaS company specializing in workflow automation for SMB clients. 80 employees, Series B funded.",
+  "ipo": "Planned within 3 years",
+  "age_min": 24,
+  "age_max": 45,
+  "gender": "Any",
+  "experience": "PHP, Laravel, MySQL, REST API, Git, Backend Architecture",
+  "pref_nationality": "Any",
+  "job_change_possibility_description": "Growth path to Tech Lead or Backend Architect within 18-24 months as the team scales. Opportunity to own a product module end-to-end.",
+  "recruitment_background": "Existing backend engineer leaving for overseas. Immediate headcount replacement needed to maintain delivery velocity for upcoming Q3 feature release.",
+  "location_change_possibility_description": "Primary office is Tokyo (Hybrid). Potential for full-remote arrangement after probation period based on performance.",
+  "monthly_average_overtime": "20 hours",
+  "prevent_passive_smoking_description": "Smoke-free office building. Designated outdoor smoking area available. No smoking permitted within 20 metres of the entrance.",
+  "others": null,
+  "interview_guaranteed_detail": null,
+  "potential_candidates": null,
+  "agent_decision_duration": "N/A",
+  "agent_others": null,
+  "agent_refund": "N/A",
+  "imp_rec_points": null,
+  "rejection_points": null,
+  "selection_flow": "CV Screening → Technical Test → 1st Interview (Tech Lead) → Final Interview (CTO)",
+  "selection_flow_details": "Technical test is a take-home Laravel task (3-4 hrs). Results within 5 business days.",
+  "agent_percent": 30,
+  "agent_fee_type": "percent",
+  "job_employment_category": ["Permanent"],
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 1 (job_id: 3001) ------------------------------------------------
+{
+  "last_name": "Tanaka",
+  "first_name": "Kenji",
+  "furigana_last_name": "タナカ",
+  "furigana_first_name": "ケンジ",
+  "dob": "1991-04-15",
+  "gender": "male",
+  "nationality": "Japanese",
+  "email": "kenji.tanaka@example.com",
+  "phone": "090-1234-5678",
+  "academic_background": "Bachelor",
+  "educational_background_details": "Waseda University — Computer Science (2013)",
+  "skill": [{"title": "PHP", "index": 0}, {"title": "Laravel", "index": 1}, {"title": "MySQL", "index": 2}, {"title": "REST API", "index": 3}, {"title": "Git", "index": 4}, {"title": "Docker", "index": 5}, {"title": "Redis", "index": 6}],
+  "qualification": [{"title": "AWS Certified Developer – Associate", "index": 0}],
+  "japanese_skills": "Native",
+  "english_skills": "Business",
+  "experience": 8,
+  "years_of_industry_experience": 6,
+  "no_of_company_change": 2,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "Backend Engineer",
+  "current_year_salary": 6200000,
+  "most_recent_workplace": "CloudLogic Co., Ltd.",
+  "self_promotion": "8年間のPHP/Laravel開発経験を持ち、REST APIの設計・実装から本番環境の運用まで一貫して担当してきました。AWSを使ったインフラ構築経験もあり、スケーラブルなシステム設計が得意です。チームリードの経験もあり、コードレビューや技術的な意思決定も行っています。",
+  "employment_histories": [
+    {
+      "company": "CloudLogic Co., Ltd.",
+      "position": "Backend Engineer",
+      "start_date": "2019-04",
+      "end_date": null,
+      "description": "Laravel-based SaaS product development, REST API design, AWS deployment"
+    },
+    {
+      "company": "Techwave Japan",
+      "position": "Web Developer",
+      "start_date": "2015-04",
+      "end_date": "2019-03",
+      "description": "PHP/MySQL web application development for enterprise clients"
+    }
+  ],
+  "desired_job_change_timing": "Within 3 months",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "Senior Backend Engineer / Tech Lead",
+  "min_desire_salary": 7000000,
+  "relocation": "Possible within Tokyo",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 2 (job_id: 3001) ------------------------------------------------
+{
+  "last_name": "Kim",
+  "first_name": "Junho",
+  "furigana_last_name": "キム",
+  "furigana_first_name": "ジュンホ",
+  "dob": "1993-08-22",
+  "gender": "male",
+  "nationality": "Korean",
+  "email": "junho.kim@example.com",
+  "phone": "080-9876-5432",
+  "academic_background": "Bachelor",
+  "educational_background_details": "Seoul National University — Software Engineering (2016)",
+  "skill": [{"title": "PHP", "index": 0}, {"title": "Laravel", "index": 1}, {"title": "Vue.js", "index": 2}, {"title": "MySQL", "index": 3}, {"title": "Git", "index": 4}, {"title": "Redis", "index": 5}, {"title": "Docker", "index": 6}, {"title": "PHPUnit", "index": 7}],
+  "qualification": [],
+  "japanese_skills": "Business (JLPT N2)",
+  "english_skills": "Conversational",
+  "experience": 6,
+  "years_of_industry_experience": 5,
+  "no_of_company_change": 1,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "Full-stack Developer",
+  "current_year_salary": 5800000,
+  "most_recent_workplace": "Digital Craft Inc.",
+  "self_promotion": "6年間のWeb開発経験があり、LaravelとVue.jsを組み合わせたフルスタック開発を担当してきました。テスト駆動開発とCI/CDパイプラインの構築経験があります。日本語（JLPT N2）でチームコミュニケーションも問題ありません。",
+  "employment_histories": [
+    {
+      "company": "Digital Craft Inc.",
+      "position": "Full-stack Developer",
+      "start_date": "2018-07",
+      "end_date": null,
+      "description": "Laravel + Vue.js SaaS application, PHPUnit testing, Docker-based CI/CD"
+    }
+  ],
+  "desired_job_change_timing": "Within 1 month",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "Backend Engineer",
+  "min_desire_salary": 6500000,
+  "relocation": "Tokyo or Kanagawa",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- SELECTION HISTORY ---------------------------------------------------------
+{ "candidate_id": 4001, "job_id": 3001, "match_score": 93, "match_reason": "Tanaka has 8 years PHP/Laravel, REST API design, AWS, and Docker — covers all required and welcome conditions. Native Japanese. Strong A-rank candidate.", "recommended_bulk": true }
+{ "candidate_id": 4002, "job_id": 3001, "match_score": 87, "match_reason": "Kim has 6 years Laravel + Vue.js full-stack, PHPUnit TDD, CI/CD experience. JLPT N2. Solid technical alignment with welcome conditions.", "recommended_bulk": true }
+
+
+################################################################################
+JOB 2 — 公認会計士 / Senior Accountant (Osaka, Full-time)  [Japanese job]
+################################################################################
+
+---- JOB PAYLOAD ---------------------------------------------------------------
+{
+  "job_status": "Open",
+  "job_title": "シニア経理担当（公認会計士歓迎）",
+  "employment_status": "Full-time",
+  "minimum_education_level": "Bachelor",
+  "recruitment_status": "Active",
+  "minimum_job_experience": "3",
+  "minimum_industry_experience": "1",
+  "job_description": "中堅製造業グループの経理部門にて、月次・年次決算業務全般および税務申告補助を担当していただきます。ERPシステム（SAP）を活用した財務管理業務をお任せします。",
+  "application_condition": "経理実務経験3年以上、簿記2級以上取得者、ERP（SAPまたはOracleなど）の使用経験",
+  "welcome_condition": "公認会計士（CPA）資格保有者、連結決算・税務申告の経験者、英語でのレポーティング経験",
+  "benefits": "社会保険完備、年2回賞与、退職金制度あり、資格取得支援制度（受験費用全額補助）",
+  "location_desc": "大阪市北区（梅田駅徒歩5分）",
+  "working_hours": "09:00-18:00（残業月平均20時間以内）",
+  "no_of_vacancy": "1",
+  "relocation": "不可",
+  "allowances": "交通費全額支給（上限月3万円）",
+  "holidays": "土日祝日、年次有給休暇（初年度10日）、夏季・冬季休暇",
+  "probation": "3ヶ月",
+  "probation_detail": "本採用と同条件",
+  "min_year_salary": 4500000,
+  "max_year_salary": 7500000,
+  "min_month_salary": 375000,
+  "max_month_salary": 625000,
+  "salary_desc": "経験・スキルを考慮の上、優遇します",
+  "bonus": "Yes",
+  "bonus_desc": "年2回（6月・12月）実績に応じ支給",
+  "organization_name": "株式会社大和製造グループ",
+  "organization_description": "創業50年以上の中堅製造・商社グループ。従業員数約500名。安定した事業基盤を持つ。",
+  "age_min": 25,
+  "age_max": 45,
+  "gender": "Any",
+  "experience": "経理、決算、SAP、税務申告、財務報告",
+  "pref_nationality": "Any",
+  "academic_level": "Bachelor",
+  "job_change_possibility_description": "将来的に経理部長または財務戦略担当へのキャリアアップが見込めます。グループ会社への異動機会もあり。",
+  "job_change_possibility_description": "将来的に経理部長または財務戦略担当へのキャリアアップが見込めます。グループ会社への異動機会もあり。",
+  "recruitment_background": "現担当者の定年退職に伴う後継者採用。グループ全体の経理体制強化を目的として、即戦力人材を求めています。",
+  "location_change_possibility_description": "勤務地は大阪本社（梅田）固定。転勤の可能性はありませんが、将来的にグループ会社（東京・名古屋）への異動の可能性があります。",
+  "monthly_average_overtime": "月平均20時間以内",
+  "prevent_passive_smoking_description": "屋内禁煙。屋外に喫煙スペースあり。受動喫煙防止措置として、執務エリアへの煙の流入を完全に遮断しています。",
+  "others": null,
+  "interview_guaranteed_detail": null,
+  "potential_candidates": null,
+  "agent_decision_duration": null,
+  "agent_others": null,
+  "agent_refund": null,
+  "imp_rec_points": null,
+  "rejection_points": null,
+  "selection_flow": "書類選考 → 適性検査 → 一次面接（経理部長） → 最終面接（役員）",
+  "selection_flow_details": "選考期間の目安：3〜4週間。内定後、入社日は相談に応じます。",
+  "agent_percent": 30,
+  "agent_fee_type": "percent",
+  "job_employment_category": ["Permanent"],
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 1 (job_id: 3002) ------------------------------------------------
+{
+  "last_name": "山田",
+  "first_name": "花子",
+  "furigana_last_name": "ヤマダ",
+  "furigana_first_name": "ハナコ",
+  "dob": "1988-11-03",
+  "gender": "female",
+  "nationality": "Japanese",
+  "email": "hanako.yamada@example.com",
+  "phone": "06-1234-5678",
+  "academic_background": "Bachelor",
+  "educational_background_details": "大阪大学 経済学部（2011年卒）",
+  "skill": [{"title": "SAP", "index": 0}, {"title": "決算業務", "index": 1}, {"title": "税務申告", "index": 2}, {"title": "Excel（ピボット・マクロ）", "index": 3}, {"title": "財務分析", "index": 4}],
+  "qualification": [{"title": "公認会計士（CPA）", "index": 0}, {"title": "日商簿記1級", "index": 1}],
+  "japanese_skills": "ネイティブ",
+  "english_skills": "Business",
+  "experience": 10,
+  "years_of_industry_experience": 8,
+  "no_of_company_change": 2,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "経理課長代理",
+  "current_year_salary": 6800000,
+  "most_recent_workplace": "株式会社サクラ物産",
+  "self_promotion": "公認会計士として10年以上の経理実務経験があります。月次・年次決算から連結決算、税務申告書の作成まで一貫して担当してきました。SAPを用いた財務システムの導入・移行プロジェクトにも参画した経験があります。管理会計・原価計算にも精通しており、経営陣へのレポーティング経験も豊富です。",
+  "employment_histories": [
+    {
+      "company": "株式会社サクラ物産",
+      "position": "経理課長代理",
+      "start_date": "2017-04",
+      "end_date": null,
+      "description": "月次・年次決算、連結決算、SAP導入プロジェクト参画"
+    },
+    {
+      "company": "有限会社みらい会計事務所",
+      "position": "会計士補",
+      "start_date": "2011-04",
+      "end_date": "2017-03",
+      "description": "法人税務申告、財務諸表監査補助"
+    }
+  ],
+  "desired_job_change_timing": "3ヶ月以内",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "経理部長 / シニア経理担当",
+  "min_desire_salary": 7000000,
+  "relocation": "大阪市内および近郊",
+  "candidate_rank": "S",
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 2 (job_id: 3002) ------------------------------------------------
+{
+  "last_name": "中村",
+  "first_name": "翔太",
+  "furigana_last_name": "ナカムラ",
+  "furigana_first_name": "ショウタ",
+  "dob": "1994-06-17",
+  "gender": "male",
+  "nationality": "Japanese",
+  "email": "shota.nakamura@example.com",
+  "phone": "080-4567-8901",
+  "academic_background": "Bachelor",
+  "educational_background_details": "関西大学 商学部（2017年卒）",
+  "skill": [{"title": "Oracle ERP", "index": 0}, {"title": "月次決算", "index": 1}, {"title": "売掛金・買掛金管理", "index": 2}, {"title": "財務諸表作成", "index": 3}, {"title": "Excel", "index": 4}],
+  "qualification": [{"title": "日商簿記2級", "index": 0}, {"title": "FP2級", "index": 1}],
+  "japanese_skills": "ネイティブ",
+  "english_skills": "Conversational",
+  "experience": 6,
+  "years_of_industry_experience": 5,
+  "no_of_company_change": 1,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "経理担当",
+  "current_year_salary": 4800000,
+  "most_recent_workplace": "株式会社東洋製造",
+  "self_promotion": "製造業での経理実務を6年間担当しています。売掛・買掛管理、月次決算補助、Oracle ERPによるデータ管理が主な業務です。簿記2級を保有しており、決算業務の全体像を把握しています。より規模の大きな会社で連結決算や税務申告にも携わりたいと考え、転職を決意しました。",
+  "employment_histories": [
+    {
+      "company": "株式会社東洋製造",
+      "position": "経理担当",
+      "start_date": "2018-04",
+      "end_date": null,
+      "description": "Oracle ERP使用、AP/AR管理、月次決算補助"
+    }
+  ],
+  "desired_job_change_timing": "1ヶ月以内",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "経理担当 / 経理リーダー",
+  "min_desire_salary": 5500000,
+  "relocation": "大阪・兵庫",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- SELECTION HISTORY ---------------------------------------------------------
+{ "candidate_id": 4003, "job_id": 3002, "match_score": 96, "match_reason": "山田花子は公認会計士資格・SAP経験・連結決算経験を持ち、全応募条件および歓迎条件を完全に満たしている。Sランク候補。", "recommended_bulk": true }
+{ "candidate_id": 4004, "job_id": 3002, "match_score": 81, "match_reason": "中村翔太は製造業での経理実務6年、Oracle ERP使用経験あり。簿記2級取得。応募条件を満たし成長余地もある。", "recommended_bulk": true }
+
+
+################################################################################
+JOB 3 — React Frontend Engineer (Remote-first)
+################################################################################
+
+---- JOB PAYLOAD ---------------------------------------------------------------
+{
+  "job_status": "Open",
+  "job_title": "Senior React Frontend Engineer",
+  "employment_status": "Full-time",
+  "minimum_education_level": "Any",
+  "recruitment_status": "Active",
+  "minimum_job_experience": "3",
+  "minimum_industry_experience": "2",
+  "job_description": "Join our product team to build a world-class React-based web application used by 200,000+ users. You will own UI architecture, component libraries, and performance optimization.",
+  "application_condition": "3+ years React experience; TypeScript; REST/GraphQL API integration; responsive design; Git.",
+  "welcome_condition": "Next.js, Storybook, Playwright/Cypress testing, design system experience, Figma collaboration.",
+  "benefits": "Social insurance, ¥500,000 annual training budget, co-working space allowance, stock options",
+  "location_desc": "Full Remote (Japan-based)",
+  "working_hours": "Flextime — core hours 11:00-16:00",
+  "no_of_vacancy": "2",
+  "relocation": "Remote — anywhere in Japan",
+  "allowances": "Internet ¥5,000/month, equipment ¥150,000 one-time",
+  "holidays": "Sat/Sun/National holidays, unlimited PTO policy",
+  "probation": "3 months",
+  "min_year_salary": 6000000,
+  "max_year_salary": 10000000,
+  "min_month_salary": 500000,
+  "max_month_salary": 833000,
+  "salary_desc": "Highly competitive, dependent on experience",
+  "bonus": "Yes",
+  "bonus_desc": "Performance bonus up to 20% of annual salary",
+  "organization_name": "Nexus Digital K.K.",
+  "organization_description": "Product-led growth startup building a SaaS analytics platform. 45 employees, fully remote, Series A.",
+  "ipo": "N/A",
+  "age_min": 22,
+  "age_max": 40,
+  "gender": "Any",
+  "experience": "React, TypeScript, Next.js, GraphQL, CSS-in-JS, Git",
+  "pref_nationality": "Any",
+   "job_change_possibility_description": "Clear path to Frontend Lead or UI/UX Architect. Opportunity to build the design system from scratch and mentor junior engineers.",
+  "job_change_possibility_description": "Clear path to Frontend Lead or UI/UX Architect. Opportunity to build the design system from scratch and mentor junior engineers.",
+  "recruitment_background": "Rapid user growth (200K+ users) requires expanding the frontend team. New headcount approved as part of Series A expansion plan to accelerate product delivery.",
+  "location_change_possibility_description": "Fully remote — work from anywhere in Japan. No relocation required now or in future. Occasional team offsites (2-3x per year, Tokyo).",
+  "monthly_average_overtime": "10 hours",
+  "prevent_passive_smoking_description": "Fully remote team — no shared office space. No passive smoking concern in day-to-day work environment.",
+  "others": null,
+  "interview_guaranteed_detail": null,
+  "potential_candidates": null,
+  "agent_decision_duration": null,
+  "agent_others": null,
+  "agent_refund": null,
+  "imp_rec_points": null,
+  "rejection_points": null,
+  "selection_flow": "Portfolio Review → Technical Interview (Live coding 60min) → System Design Interview → Culture Fit",
+  "agent_percent": 30,
+  "agent_fee_type": "percent",
+  "job_employment_category": ["Permanent"],
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 1 (job_id: 3003) ------------------------------------------------
+{
+  "last_name": "Suzuki",
+  "first_name": "Ayaka",
+  "furigana_last_name": "スズキ",
+  "furigana_first_name": "アヤカ",
+  "dob": "1995-02-28",
+  "gender": "female",
+  "nationality": "Japanese",
+  "email": "ayaka.suzuki@example.com",
+  "phone": "070-2345-6789",
+  "academic_background": "Bachelor",
+  "educational_background_details": "慶應義塾大学 環境情報学部（2017年卒）",
+  "skill": [{"title": "React", "index": 0}, {"title": "TypeScript", "index": 1}, {"title": "Next.js", "index": 2}, {"title": "Storybook", "index": 3}, {"title": "Tailwind CSS", "index": 4}, {"title": "GraphQL", "index": 5}, {"title": "Figma", "index": 6}, {"title": "Cypress", "index": 7}],
+  "qualification": [],
+  "japanese_skills": "Native",
+  "english_skills": "Business",
+  "experience": 7,
+  "years_of_industry_experience": 6,
+  "no_of_company_change": 2,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "Frontend Engineer",
+  "current_year_salary": 7500000,
+  "most_recent_workplace": "Fintech Startup Alpha",
+  "self_promotion": "7 years of frontend development with React as my primary framework. I built and maintained a component library used across 3 products, led the migration from CRA to Next.js, and implemented a full Cypress E2E test suite. I collaborate closely with designers in Figma and care deeply about accessibility and performance (Lighthouse score >95 across all key pages).",
+  "employment_histories": [
+    {
+      "company": "Fintech Startup Alpha",
+      "position": "Senior Frontend Engineer",
+      "start_date": "2020-06",
+      "end_date": null,
+      "description": "React/Next.js product development, component library ownership, Cypress testing"
+    },
+    {
+      "company": "Web Agency Beta",
+      "position": "Frontend Developer",
+      "start_date": "2017-04",
+      "end_date": "2020-05",
+      "description": "React + TypeScript client projects, Figma-to-code implementation"
+    }
+  ],
+  "desired_job_change_timing": "Within 2 months",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "Senior Frontend Engineer / Frontend Lead",
+  "min_desire_salary": 8500000,
+  "relocation": "Remote preferred",
+  "candidate_rank": "S",
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 2 (job_id: 3003) ------------------------------------------------
+{
+  "last_name": "Patel",
+  "first_name": "Rohan",
+  "furigana_last_name": "パテル",
+  "furigana_first_name": "ロハン",
+  "dob": "1997-09-10",
+  "gender": "male",
+  "nationality": "Indian",
+  "email": "rohan.patel@example.com",
+  "phone": "090-5555-7777",
+  "academic_background": "Bachelor",
+  "educational_background_details": "Indian Institute of Technology Bombay — Computer Science (2019)",
+  "skill": [{"title": "React", "index": 0}, {"title": "TypeScript", "index": 1}, {"title": "Redux", "index": 2}, {"title": "REST API", "index": 3}, {"title": "Jest", "index": 4}, {"title": "Git", "index": 5}, {"title": "CSS Modules", "index": 6}],
+  "qualification": [],
+  "japanese_skills": "Conversational (JLPT N3)",
+  "english_skills": "Native",
+  "experience": 5,
+  "years_of_industry_experience": 4,
+  "no_of_company_change": 1,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "Frontend Developer",
+  "current_year_salary": 5500000,
+  "most_recent_workplace": "Mercuri Tech Japan",
+  "self_promotion": "5 years building React applications with TypeScript. Strong in state management (Redux / Zustand) and REST API integration. Wrote comprehensive Jest test coverage for a customer-facing dashboard (80%+ coverage). Eager to step into a Next.js environment and grow into a senior role. English native, JLPT N3 Japanese.",
+  "employment_histories": [
+    {
+      "company": "Mercuri Tech Japan",
+      "position": "Frontend Developer",
+      "start_date": "2021-04",
+      "end_date": null,
+      "description": "React + TypeScript dashboard, Redux state management, Jest unit testing"
+    }
+  ],
+  "desired_job_change_timing": "Within 1 month",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "Frontend Engineer",
+  "min_desire_salary": 7000000,
+  "relocation": "Full remote",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- SELECTION HISTORY ---------------------------------------------------------
+{ "candidate_id": 4005, "job_id": 3003, "match_score": 95, "match_reason": "Suzuki Ayaka covers all required + welcome conditions: React, TypeScript, Next.js, Storybook, Cypress, Figma. 7 years experience with component library ownership. S-rank.", "recommended_bulk": true }
+{ "candidate_id": 4006, "job_id": 3003, "match_score": 82, "match_reason": "Patel Rohan has strong React/TypeScript/Jest foundation. Missing Next.js experience but shows clear growth trajectory. English native is a bonus for English-run team.", "recommended_bulk": true }
+
+
+################################################################################
+JOB 4 — Bilingual HR Manager / 人事マネージャー (Tokyo, Hybrid)
+################################################################################
+
+---- JOB PAYLOAD ---------------------------------------------------------------
+{
+  "job_status": "Open",
+  "job_title": "Bilingual HR Manager (Japanese/English)",
+  "employment_status": "Full-time",
+  "minimum_education_level": "Bachelor",
+  "recruitment_status": "Active",
+  "minimum_job_experience": "5",
+  "minimum_industry_experience": "3",
+  "job_description": "Lead HR operations for a 150-person international company. Oversee recruiting, onboarding, performance review cycles, labor compliance, and employee relations across Japan and APAC offices.",
+  "application_condition": "5+ years HR experience in Japan; business-level bilingual Japanese/English; knowledge of Japanese labor law; experience with HRIS systems.",
+  "welcome_condition": "Experience in fast-growing tech company; global HR coordination; diversity & inclusion program management.",
+  "benefits": "Social insurance, annual bonus, English training subsidy, parental leave (enhanced)",
+  "location_desc": "Tokyo, Minato-ku (Hybrid — 2 days office)",
+  "working_hours": "09:00-18:00 (flextime)",
+  "no_of_vacancy": "1",
+  "relocation": "Not required",
+  "allowances": "Transport full coverage, meal allowance ¥3,000/day in-office",
+  "holidays": "Sat/Sun/National holidays, 15 days annual leave, special leave for life events",
+  "probation": "3 months",
+  "min_year_salary": 6500000,
+  "max_year_salary": 9500000,
+  "min_month_salary": 541000,
+  "max_month_salary": 791000,
+  "salary_desc": "Commensurate with experience",
+  "bonus": "Yes",
+  "bonus_desc": "Performance-based, up to 20%",
+  "organization_name": "GlobalSync Japan K.K.",
+  "organization_description": "International SaaS company with HQ in San Francisco and Japan office of 150 staff. Culture-first, globally distributed team.",
+  "age_min": 28,
+  "age_max": 50,
+  "gender": "Any",
+  "job_change_possibility_description": "Potential to grow into Head of HR Japan or Regional HR Director (APAC) as the company expands its Japan headcount beyond 300.",
+  "experience": "HR Operations, Recruiting, Labor Law, HRIS, Performance Management",
+  "pref_nationality": "Any",
+  "job_change_possibility_description": "Potential to grow into Head of HR Japan or Regional HR Director (APAC) as the company expands its Japan headcount beyond 300.",
+  "recruitment_background": "Current HR Manager relocating to HQ San Francisco. Japan office scaling from 150 to 250 staff over the next 12 months, requiring a stronger HR leadership presence.",
+  "location_change_possibility_description": "Tokyo (Minato-ku) base with hybrid flexibility. Short-term business travel to APAC offices (Singapore, Sydney) expected 2-3 times per year.",
+  "monthly_average_overtime": "15 hours",
+  "prevent_passive_smoking_description": "Complete indoor smoking ban in all company premises. Outdoor smoking booth located 30 metres from the building.",
+  "others": null,
+  "interview_guaranteed_detail": null,
+  "potential_candidates": null,
+  "agent_decision_duration": null,
+  "agent_others": null,
+  "agent_refund": null,
+  "imp_rec_points": null,
+  "rejection_points": null,
+  "selection_flow": "CV Review → HR Interview (Hiring Manager) → Case Study Presentation → Final Interview (CEO Japan)",
+  "agent_percent": 30,
+  "agent_fee_type": "percent",
+  "job_employment_category": ["Permanent"],
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 1 (job_id: 3004) ------------------------------------------------
+{
+  "last_name": "Watanabe",
+  "first_name": "Yuki",
+  "furigana_last_name": "ワタナベ",
+  "furigana_first_name": "ユキ",
+  "dob": "1986-07-19",
+  "gender": "female",
+  "nationality": "Japanese",
+  "email": "yuki.watanabe@example.com",
+  "phone": "090-8888-1122",
+  "academic_background": "Master",
+  "educational_background_details": "早稲田大学 大学院 商学研究科（2011年修了）",
+  "skill": [{"title": "採用管理", "index": 0}, {"title": "労務・人事制度設計", "index": 1}, {"title": "HRIS（WorkDay）", "index": 2}, {"title": "評価制度構築", "index": 3}, {"title": "D&I推進", "index": 4}],
+  "qualification": [{"title": "社会保険労務士（SR）", "index": 0}],
+  "japanese_skills": "Native",
+  "english_skills": "Business (TOEIC 870)",
+  "toeic": 870,
+  "experience": 12,
+  "years_of_industry_experience": 12,
+  "no_of_company_change": 2,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "HRBPマネージャー",
+  "current_year_salary": 8500000,
+  "most_recent_workplace": "テクノグローバル株式会社",
+  "self_promotion": "12年間の人事キャリアを持ち、採用・労務・制度設計からグローバルHRBPまで幅広く担当してきました。WorkDay導入プロジェクトをPMとして推進し、200名規模の組織再編に携わった経験があります。英語でのHRコミュニケーション（TOEIC 870）が可能で、外資系企業のカルチャーにも慣れています。",
+  "employment_histories": [
+    {
+      "company": "テクノグローバル株式会社",
+      "position": "HRBPマネージャー",
+      "start_date": "2016-09",
+      "end_date": null,
+      "description": "HRBP（事業部門担当）、WorkDay導入PM、D&I推進プログラム設計"
+    },
+    {
+      "company": "株式会社ジャパンコンサルト",
+      "position": "人事担当",
+      "start_date": "2011-04",
+      "end_date": "2016-08",
+      "description": "採用・労務・制度設計全般"
+    }
+  ],
+  "desired_job_change_timing": "3ヶ月以内",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "HR Manager / HRBP Lead",
+  "min_desire_salary": 9000000,
+  "relocation": "東京23区内",
+  "candidate_rank": "S",
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 2 (job_id: 3004) ------------------------------------------------
+{
+  "last_name": "Chen",
+  "first_name": "Li",
+  "furigana_last_name": "チェン",
+  "furigana_first_name": "リ",
+  "dob": "1990-03-05",
+  "gender": "female",
+  "nationality": "Chinese",
+  "email": "li.chen@example.com",
+  "phone": "080-3333-9999",
+  "academic_background": "Bachelor",
+  "educational_background_details": "Peking University — Business Administration (2013)",
+  "skill": [{"title": "Recruiting", "index": 0}, {"title": "Onboarding", "index": 1}, {"title": "Performance Management", "index": 2}, {"title": "Labor Compliance Japan", "index": 3}, {"title": "BambooHR", "index": 4}],
+  "qualification": [],
+  "japanese_skills": "Business (JLPT N1)",
+  "english_skills": "Business",
+  "chinese_skills": "Native",
+  "experience": 8,
+  "years_of_industry_experience": 7,
+  "no_of_company_change": 3,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "HR Generalist",
+  "current_year_salary": 6200000,
+  "most_recent_workplace": "Sino-Japan Commerce Co.",
+  "self_promotion": "8 years of HR experience across China and Japan markets. Fluent in Japanese (JLPT N1), English, and Mandarin — enabling me to bridge communication between global and Japan teams. Experienced in full-cycle recruiting, Japanese labor compliance, and HRIS management (BambooHR). Strong interpersonal skills with a track record of improving employee engagement scores by 18% at current company.",
+  "employment_histories": [
+    {
+      "company": "Sino-Japan Commerce Co.",
+      "position": "HR Generalist",
+      "start_date": "2019-01",
+      "end_date": null,
+      "description": "Full-cycle recruiting, Japan labor compliance, BambooHR administration"
+    }
+  ],
+  "desired_job_change_timing": "Within 1 month",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "HR Manager",
+  "min_desire_salary": 7500000,
+  "relocation": "Tokyo",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- SELECTION HISTORY ---------------------------------------------------------
+{ "candidate_id": 4007, "job_id": 3004, "match_score": 94, "match_reason": "Watanabe Yuki: 12 years HR, SR license, WorkDay HRIS, D&I, bilingual (TOEIC 870), HRBPマネージャー experience. Matches all conditions. S-rank.", "recommended_bulk": true }
+{ "candidate_id": 4008, "job_id": 3004, "match_score": 85, "match_reason": "Chen Li: trilingual (JP N1 / EN / CN), full-cycle recruiting, Japan labor compliance, 8 years experience. Strong global HR communication asset.", "recommended_bulk": true }
+
+
+################################################################################
+JOB 5 — データアナリスト / Data Analyst (Tokyo)  [Japanese + English hybrid]
+################################################################################
+
+---- JOB PAYLOAD ---------------------------------------------------------------
+{
+  "job_status": "Open",
+  "job_title": "データアナリスト（マーケティング・プロダクト分析）",
+  "employment_status": "Full-time",
+  "minimum_education_level": "Bachelor",
+  "recruitment_status": "Active",
+  "minimum_job_experience": "2",
+  "minimum_industry_experience": "1",
+  "job_description": "マーケティングおよびプロダクトチームと連携し、ユーザー行動データの分析・可視化・施策提言を担当します。SQLおよびBIツールを活用し、データドリブンな意思決定を支援してください。",
+  "application_condition": "SQL実務経験2年以上、BIツール使用経験（Tableau / Looker / Power BI等）、統計の基礎知識",
+  "welcome_condition": "Python（pandas/numpy）、A/Bテスト設計・分析経験、マーケティングKPI分析経験、英語でのコミュニケーション",
+  "benefits": "社会保険完備、年2回賞与、書籍購入支援（年5万円）、カンファレンス参加支援",
+  "location_desc": "東京都渋谷区（リモート可 週2〜3日）",
+  "working_hours": "10:00-19:00（フレックス制、コアタイム12:00-16:00）",
+  "no_of_vacancy": "1",
+  "relocation": "不可",
+  "allowances": "交通費実費支給、リモートワーク補助（月5,000円）",
+  "holidays": "土日祝日、年次有給休暇10日〜（勤続年数に応じ加算）",
+  "probation": "3ヶ月",
+  "probation_detail": "本採用と同条件",
+  "min_year_salary": 4800000,
+  "max_year_salary": 7800000,
+  "min_month_salary": 400000,
+  "max_month_salary": 650000,
+  "salary_desc": "経験・スキルを考慮し優遇",
+  "bonus": "Yes",
+  "bonus_desc": "年2回（業績連動）",
+  "organization_name": "株式会社DataLoop",
+  "organization_description": "消費者向けEC・メディアプラットフォームを運営するスタートアップ。月間アクティブユーザー300万人。データドリブン文化を重視。",
+  "age_min": 23,
+  "age_max": 38,
+  "gender": "Any",
+   "job_change_possibility_description": "シニアデータアナリストまたはデータサイエンティストへのキャリアアップが可能。将来的にはデータエンジニアリングチームとのクロスファンクションな役割も期待。",
+  "experience": "SQL, Tableau, データ分析, BIツール, Python",
+  "pref_nationality": "Any",
+  "job_change_possibility_description": "シニアデータアナリストまたはデータサイエンティストへのキャリアアップが可能。将来的にはデータエンジニアリングチームとのクロスファンクションな役割も期待。",
+  "recruitment_background": "データドリブン経営の強化に向け、マーケティング・プロダクト両部門を横断して分析を担うポジションを新設。組織拡大に伴う新規採用です。",
+  "location_change_possibility_description": "渋谷本社勤務（週2〜3日リモート可）。将来的な転勤は想定していませんが、グループ会社への出向の可能性は低いながら存在します。",
+  "monthly_average_overtime": "月平均15時間",
+  "prevent_passive_smoking_description": "オフィスビル全館禁煙。喫煙者は屋外指定喫煙所を利用。受動喫煙対策として健康増進法に基づく措置を講じています。",
+  "others": null,
+  "interview_guaranteed_detail": null,
+  "potential_candidates": null,
+  "agent_decision_duration": null,
+  "agent_others": null,
+  "agent_refund": null,
+  "imp_rec_points": null,
+  "rejection_points": null,
+  "selection_flow": "書類選考 → SQLスキルチェック（30分オンライン） → 一次面接 → ケーススタディ → 最終面接",
+  "agent_percent": 30,
+  "agent_fee_type": "percent",
+  "job_employment_category": ["Permanent"],
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 1 (job_id: 3005) ------------------------------------------------
+{
+  "last_name": "Ito",
+  "first_name": "Haruto",
+  "furigana_last_name": "イトウ",
+  "furigana_first_name": "ハルト",
+  "dob": "1996-12-01",
+  "gender": "male",
+  "nationality": "Japanese",
+  "email": "haruto.ito@example.com",
+  "phone": "080-6666-2233",
+  "academic_background": "Bachelor",
+  "educational_background_details": "東京大学 工学部 計数工学科（2019年卒）",
+  "skill": [{"title": "SQL", "index": 0}, {"title": "Python（pandas, numpy, matplotlib）", "index": 1}, {"title": "Tableau", "index": 2}, {"title": "R", "index": 3}, {"title": "BigQuery", "index": 4}, {"title": "A/Bテスト", "index": 5}, {"title": "Google Analytics", "index": 6}],
+  "qualification": [{"title": "統計検定2級", "index": 0}, {"title": "G検定（AI）", "index": 1}],
+  "japanese_skills": "Native",
+  "english_skills": "Business",
+  "experience": 5,
+  "years_of_industry_experience": 4,
+  "no_of_company_change": 1,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "データアナリスト",
+  "current_year_salary": 5800000,
+  "most_recent_workplace": "株式会社メディアテック",
+  "self_promotion": "東大工学部卒のデータアナリストです。SQL・Python・Tableauを使った分析業務を5年担当し、マーケティング施策のA/Bテスト設計・効果測定、LTVモデル構築、ダッシュボード開発などを経験しています。BigQueryを用いた大規模ログデータ分析にも慣れており、分析結果をビジネスサイドへわかりやすく伝えることが得意です。",
+  "employment_histories": [
+    {
+      "company": "株式会社メディアテック",
+      "position": "データアナリスト",
+      "start_date": "2019-04",
+      "end_date": null,
+      "description": "SQL/Python/Tableauによる行動ログ分析、A/Bテスト、LTVモデル、BigQueryデータ基盤"
+    }
+  ],
+  "desired_job_change_timing": "2ヶ月以内",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "シニアデータアナリスト / データサイエンティスト",
+  "min_desire_salary": 6500000,
+  "relocation": "東京・神奈川",
+  "candidate_rank": "S",
+  "dynamic_fields": {}
+}
+
+---- CANDIDATE 2 (job_id: 3005) ------------------------------------------------
+{
+  "last_name": "Park",
+  "first_name": "Soyeon",
+  "furigana_last_name": "パク",
+  "furigana_first_name": "ソヨン",
+  "dob": "1998-05-14",
+  "gender": "female",
+  "nationality": "Korean",
+  "email": "soyeon.park@example.com",
+  "phone": "090-4444-6655",
+  "academic_background": "Master",
+  "educational_background_details": "Yonsei University — Statistics MS (2022)",
+  "skill": [{"title": "SQL", "index": 0}, {"title": "Python（pandas, scikit-learn）", "index": 1}, {"title": "Power BI", "index": 2}, {"title": "Excel（高度な関数）", "index": 3}, {"title": "Statistical Analysis", "index": 4}],
+  "qualification": [],
+  "japanese_skills": "Business (JLPT N2)",
+  "english_skills": "Business",
+  "experience": 3,
+  "years_of_industry_experience": 2,
+  "no_of_company_change": 0,
+  "current_employment_status": "Employed",
+  "current_employment_type": "Full-time",
+  "current_position": "Junior Data Analyst",
+  "current_year_salary": 4200000,
+  "most_recent_workplace": "Korea Data Solutions Japan Branch",
+  "self_promotion": "統計学修士を持ち、SQLとPythonを用いたデータ分析を2年間実施しています。Power BIを使ったレポート作成および経営陣向けのKPIダッシュボード構築経験があります。マーケティングデータ分析の経験もあり、日本語（N2）・英語でのビジネスコミュニケーションが可能です。",
+  "employment_histories": [
+    {
+      "company": "Korea Data Solutions Japan Branch",
+      "position": "Junior Data Analyst",
+      "start_date": "2022-09",
+      "end_date": null,
+      "description": "SQL/Python/Power BIによるKPIダッシュボード、マーケティング効果測定"
+    }
+  ],
+  "desired_job_change_timing": "Within 1 month",
+  "desired_employment_type": ["Full-time"],
+  "desired_position": "Data Analyst",
+  "min_desire_salary": 5000000,
+  "relocation": "Tokyo (Shibuya / Shinjuku preferred)",
+  "candidate_rank": "A",
+  "dynamic_fields": {}
+}
+
+---- SELECTION HISTORY ---------------------------------------------------------
+{ "candidate_id": 4009, "job_id": 3005, "match_score": 97, "match_reason": "伊藤ハルトは東大工学部卒、SQL/Python/Tableau/BigQuery/A/Bテスト全条件を網羅。歓迎条件も完全一致。Sランク。", "recommended_bulk": true }
+{ "candidate_id": 4010, "job_id": 3005, "match_score": 79, "match_reason": "パク・ソヨンは統計修士/SQL/Python/Power BI/マーケティング分析経験あり。JLPT N2。N1でないが業務レベルの日本語コミュニケーション可能。成長余地大。", "recommended_bulk": true }
+
+
+================================================================================
+SUMMARY TABLE
+================================================================================
+
+| job_id | Job Title (EN)                          | Candidate IDs | Top Score |
+|--------|-----------------------------------------|---------------|-----------|
+| 3001   | Senior PHP / Laravel Backend Engineer   | 4001, 4002    | 93        |
+| 3002   | シニア経理担当（公認会計士歓迎）           | 4003, 4004    | 96        |
+| 3003   | Senior React Frontend Engineer          | 4005, 4006    | 95        |
+| 3004   | Bilingual HR Manager                    | 4007, 4008    | 94        |
+| 3005   | データアナリスト                          | 4009, 4010    | 97        |
+
+================================================================================
+INSERTION ORDER (to avoid FK issues)
+================================================================================
+1. Insert all 10 candidates into `candidate_pool`  (ids 4001-4010)
+2. Insert all 5 jobs into `pb_job`                 (ids 3001-3005)
+3. Insert all 10 rows into `selection_history`
+================================================================================
+

@@ -280,7 +280,7 @@ class AIMatcherService:
             job_similarities.append((job, sim))
 
         job_similarities.sort(key=lambda x: x[1], reverse=True)
-        top_jobs = [item[0] for item in job_similarities[:5]]  # Top 5 for speed
+        top_jobs = [item[0] for item in job_similarities[:20]]  # Top 20 for broader results
         logger.info(f"Semantic search completed. Top Job: {top_jobs[0].job_title if top_jobs else 'None'}")
 
         # 6. AI Reranking — parallel individual calls (faster than batch for focused context)
@@ -374,7 +374,7 @@ class AIMatcherService:
             cand_similarities.append((cand, sim))
 
         cand_similarities.sort(key=lambda x: x[1], reverse=True)
-        top_candidates = [item[0] for item in cand_similarities[:5]]  # Top 5 for speed
+        top_candidates = [item[0] for item in cand_similarities[:20]]  # Top 20 for broader results
         logger.info(f"Semantic search done. Top candidate: {top_candidates[0].first_name if top_candidates else 'None'}")
 
         # 6. AI Reranking — parallel individual calls
